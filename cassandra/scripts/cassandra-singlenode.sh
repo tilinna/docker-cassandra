@@ -9,9 +9,8 @@ else SEEDS="$IP"; fi
 sed -i -e "s/- seeds: \"127.0.0.1\"/- seeds: \"$SEEDS\"/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # Listen on IP:port of the container
-#sed -i -e "s/^listen_address.*/listen_address: $IP/" $CASSANDRA_CONFIG/cassandra.yaml
-sed -i -e "s/^listen_address.*/listen_address: `hostname`/" $CASSANDRA_CONFIG/cassandra.yaml
-sed -i -e "s/^rpc_address.*/rpc_address: `hostname`/" $CASSANDRA_CONFIG/cassandra.yaml
+sed -i -e "s/^listen_address.*/listen_address: $IP/" $CASSANDRA_CONFIG/cassandra.yaml
+sed -i -e "s/^rpc_address.*/rpc_address: $IP/" $CASSANDRA_CONFIG/cassandra.yaml
 
 # With virtual nodes disabled, we need to manually specify the token
 echo "JVM_OPTS=\"\$JVM_OPTS -Dcassandra.initial_token=0\"" >> $CASSANDRA_CONFIG/cassandra-env.sh
